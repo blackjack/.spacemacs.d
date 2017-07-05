@@ -353,7 +353,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd ",,w") 'avy-goto-word-0-below)
   (define-key evil-normal-state-map (kbd ",,,") 'avy-goto-char-2)
 
-  (define-key evil-normal-state-map (kbd ",b") 'helm-buffer-list)
+  (define-key evil-normal-state-map (kbd ",b") 'helm-buffers-list)
   (define-key evil-normal-state-map (kbd ",r") 'helm-recentf)
   (define-key evil-normal-state-map (kbd ",l") 'flycheck-list-errors)
 
@@ -411,5 +411,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-builtin-face ((t (:foreground "goldenrod1" :weight normal)))))
 )
