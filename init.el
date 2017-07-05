@@ -318,6 +318,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq company-ycmd-enable-fuzzy-matching t)
   (setq company-ycmd-request-sync-timeout 0.1)
 
+  (setq recentf-exclude (quote ("\.emacs\.d\\/.cache")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -333,8 +334,6 @@ you should place your code here."
   (global-set-key (kbd "C-k") 'spacemacs/helm-dir-do-rg)
   (global-set-key (kbd "C-M-k") 'spacemacs/helm-project-do-rg)
   (global-set-key (kbd "C-p") 'helm-projectile)
-
-
 
   ;; My awesome true <leader> hotkeys
 
@@ -353,6 +352,18 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd ",,b") 'avy-goto-word-0-above)
   (define-key evil-normal-state-map (kbd ",,w") 'avy-goto-word-0-below)
   (define-key evil-normal-state-map (kbd ",,,") 'avy-goto-char-2)
+
+  (define-key evil-normal-state-map (kbd ",b") 'helm-buffer-list)
+  (define-key evil-normal-state-map (kbd ",r") 'helm-recentf)
+  (define-key evil-normal-state-map (kbd ",l") 'flycheck-list-errors)
+
+  (defun toggle-search-pattern-highlight ()
+    "Toggle the previous search patterns highlight On or Off."
+    (interactive)
+    (if (evil-ex-hl-active-p 'evil-ex-search)
+        (evil-ex-nohighlight)
+      (evil-ex-search-activate-highlight evil-ex-search-pattern)))
+  (define-key evil-normal-state-map (kbd ",/") 'toggle-search-pattern-highlight)
 
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (setq company-idle-delay 0.1)
