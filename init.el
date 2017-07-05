@@ -159,7 +159,7 @@ values."
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key ","
+   dotspacemacs-major-mode-leader-key "M-SPC"
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
@@ -237,7 +237,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -334,10 +334,28 @@ you should place your code here."
   (global-set-key (kbd "C-M-k") 'spacemacs/helm-project-do-rg)
   (global-set-key (kbd "C-p") 'helm-projectile)
 
+
+
+  ;; My awesome true <leader> hotkeys
+
+  (eval-after-load 'git-gutter+
+    '(progn
+       (define-key evil-normal-state-map (kbd "]c") 'git-gutter+-next-hunk)
+       (define-key evil-normal-state-map (kbd "[c") 'git-gutter+-previous-hunk)
+       (define-key evil-normal-state-map (kbd ",hs") 'git-gutter+-stage-hunks)
+       (define-key evil-normal-state-map (kbd ",hp") 'git-gutter+-show-hunk-inline-at-point)
+       (define-key evil-normal-state-map (kbd ",hu") 'git-gutter+-revert-hunk)
+       )
+    )
+
+  (define-key evil-normal-state-map (kbd ",,j") 'avy-goto-line-below)
+  (define-key evil-normal-state-map (kbd ",,k") 'avy-goto-line-above)
+  (define-key evil-normal-state-map (kbd ",,b") 'avy-goto-word-0-above)
+  (define-key evil-normal-state-map (kbd ",,w") 'avy-goto-word-0-below)
+  (define-key evil-normal-state-map (kbd ",,,") 'avy-goto-char-2)
+
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (setq company-idle-delay 0.1)
-
-  (set-window-fringes nil 40 40)
 
   (remove-hook 'prog-mode-hook #'smartparens-mode)
   (spacemacs/toggle-smartparens-globally-off)
